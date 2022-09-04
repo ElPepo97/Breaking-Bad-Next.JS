@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    allCharacters: []
+    allCharacters: [],
+    characterDetail: {},
+    characterDeath: {},
+    characterDeaths: {}
 }
 
 const charactersReducer = createSlice({
@@ -11,14 +14,28 @@ const charactersReducer = createSlice({
         fullCharacters(state, action){
             state.allCharacters = action.payload
         },
-        clearInfo(state){
-            state.allCharacters = {}
+        characterInfo(state, action) {
+            state.characterDetail = action.payload
+        },
+        deathInfo(state, action) {
+            state.characterDeath = action.payload
+        },
+        deathsInfo(state, action) {
+            state.characterDeaths = action.payload
+        },
+        clearInfo(state) {
+            state.characterDetail = {},
+            state.characterDeath = {},
+            state.characterDeaths = {}
         }
     }
 })
 
 export const {
     fullCharacters,
+    characterInfo,
+    deathInfo,
+    deathsInfo,
     clearInfo
 } = charactersReducer.actions
 

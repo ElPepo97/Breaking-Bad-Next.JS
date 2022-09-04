@@ -2,11 +2,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import NavBar from '../components/NavBar.js'
-import { useSelector } from 'react-redux'
-import Card from '../components/Card'
+import { useSelector, useDispatch } from 'react-redux'
+import CharacterCard from '../components/CharacterCard'
 import { useEffect, useState } from 'react'
-import { useDispatch } from "react-redux"
 import { getAllCharacters } from '../redux-toolkit/actions/charactersActions'
+import { clearInfo } from '../redux-toolkit/reducers/characters.slice'
 
 export default function Home() {
     const characters = useSelector(store => store.characters.allCharacters);
@@ -15,6 +15,7 @@ export default function Home() {
     
     useEffect(() => {
         dispatch(getAllCharacters())
+        dispatch(clearInfo())
     }, [])
 
     useEffect(() => {
@@ -27,16 +28,17 @@ export default function Home() {
         <div>
             <h1 className='flex justify-center text-3xl m-6'>Characters</h1>
             <div className='flex justify-center'>
-            <section className='grid grid-cols-3'>
+            <section className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'>
             {
             allCharacters ? allCharacters.map(c => {
                 return (
-                    <div key={c.id} className='m-10'>
-                        <Card
+                    <div key={c.char_id} className='m-10'>
+                        <CharacterCard
                             name={c.name}
                             nickname={c.nickname}
                             img={c.img}
                             category={c.category}
+                            id={c.char_id}
                         />
                     </div>
                 )

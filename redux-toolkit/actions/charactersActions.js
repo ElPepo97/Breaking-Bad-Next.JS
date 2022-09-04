@@ -1,25 +1,44 @@
 import axios from "axios";
-import { fullCharacters } from "../reducers/characters.slice";
+import { fullCharacters, characterInfo, deathInfo, deathsInfo } from "../reducers/characters.slice";
 
 const URL = 'https://www.breakingbadapi.com/api'
 
 export const getAllCharacters = () => async(dispatch) => {
     try{
-        const { data } = await axios.get(`${URL}/characters`)
+        const { data } = await axios.get(`${URL}/characters`);
 
-        const characters = data.map(c => {
-            let newCharacter = {
-                id: c.char_id,
-                name: c.name,
-                img: c.img,
-                nickname: c.nickname || null,
-                category: c.category
-            }
-            return newCharacter
-        })
-
-        dispatch(fullCharacters(characters))
+        return dispatch(fullCharacters(data))
     }catch(err){
         console.log(err)
+    }
+}
+
+export const getCharacterDetail = (id) => async (dispatch) => {
+    try {
+        const { data } = await axios.get(`${URL}/characters/${id}`)
+
+        return dispatch(characterInfo(data[0]))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getCharacterDeath = (name) => async (dispatch) => {
+    try {
+        const { data } = await axios.get(`${URL}/death?name=${name}`)
+
+        return dispatch(deathInfo(data[0]))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getCharacterDeaths = (name) => async (dispatch) => {
+    try {
+        const { data } = await axios.get(`${URL}/death-count?name=${name}`)
+
+        return dispatch(deathsInfo(data[0]))
+    } catch (error) {
+        console.log(error)
     }
 }
