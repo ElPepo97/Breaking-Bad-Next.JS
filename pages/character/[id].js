@@ -8,6 +8,7 @@ import {
     getCharacterDeaths
 } from "../../redux-toolkit/actions/charactersActions";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { TiArrowBack } from "react-icons/ti";
 
 
 export default function CharacterDetail() {
@@ -37,6 +38,11 @@ export default function CharacterDetail() {
             dispatch(getCharacterDeath(characterDetail.name?.split(' ').join('+')))
         }
     }, [characterDetail])
+
+    const handleGoBack = (e) => {
+        e.preventDefault()
+        history.back()
+    }
 
     return <div className="bg-yellow-700 min-h-screen">
         <NavBar />
@@ -85,6 +91,7 @@ export default function CharacterDetail() {
                     </div>}
                     </div>
                 </div>
+                <TiArrowBack className="text-3xl cursor-pointer" onClick={handleGoBack} />
             </div>
             : <div className="w-3/4 py-10 flex justify-evenly bg-stone-400 rounded-md shadow-xl  my-14">
                 <LoadingSpinner />

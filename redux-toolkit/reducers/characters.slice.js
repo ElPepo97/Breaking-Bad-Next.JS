@@ -5,7 +5,8 @@ const initialState = {
     characterDetail: {},
     characterDeath: {},
     characterDeaths: {},
-    loading: true
+    loading: true,
+    favorites: []
 }
 
 const charactersReducer = createSlice({
@@ -31,6 +32,15 @@ const charactersReducer = createSlice({
         },
         setLoading(state, action) {
             state.loading = action.payload
+        },
+        setFavorites(state, action) {
+            const favorite = state.favorites.filter(c => c.name === action.payload.name)
+            if (favorite.length) {
+                const newFavorites = state.favorites.filter(c => c.name !== action.payload.name)
+
+                return void(state.favorites = newFavorites)
+            }
+            void(state.favorites = [...state.favorites, action.payload])
         }
     }
 })
@@ -41,7 +51,8 @@ export const {
     deathInfo,
     deathsInfo,
     clearInfo,
-    setLoading
+    setLoading,
+    setFavorites
 } = charactersReducer.actions
 
 export default charactersReducer.reducer
