@@ -4,11 +4,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getAllEpisodes } from "../redux-toolkit/actions/episodesActions";
 import EpisodeCard from '../components/EpisodeCard.js'
 import { clearInfo } from "../redux-toolkit/reducers/characters.slice";
+import LoadingSpinner from "../components/LoadingSpinner";
+
 
 export default function Episode() {
     const episodes = useSelector(store => store.episodes.allEpisodes)
     const dispatch = useDispatch()
     const [allEpisodes, setAllEpisodes] = useState([])
+    const { loading } = useSelector(store => store.characters)
 
     useEffect(() => {
         dispatch(getAllEpisodes())
@@ -27,7 +30,7 @@ export default function Episode() {
             <div className='flex justify-center'>
             <section className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'>
             {
-            allEpisodes ? allEpisodes.map(c => {
+            !loading ? allEpisodes.map(c => {
                 return (
                     <div key={c.episode_id} className='m-10'>
                         <EpisodeCard
@@ -40,7 +43,7 @@ export default function Episode() {
                     </div>
                 )
             })
-            : null
+            : <LoadingSpinner />
             }
             </section>
             </div>

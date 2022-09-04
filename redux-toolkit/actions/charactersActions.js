@@ -1,11 +1,13 @@
 import axios from "axios";
-import { fullCharacters, characterInfo, deathInfo, deathsInfo } from "../reducers/characters.slice";
+import { fullCharacters, characterInfo, deathInfo, deathsInfo, setLoading } from "../reducers/characters.slice";
 
 const URL = 'https://www.breakingbadapi.com/api'
 
 export const getAllCharacters = () => async(dispatch) => {
     try{
+        dispatch(setLoading(true))
         const { data } = await axios.get(`${URL}/characters`);
+        dispatch(setLoading(false))
 
         return dispatch(fullCharacters(data))
     }catch(err){
@@ -15,7 +17,9 @@ export const getAllCharacters = () => async(dispatch) => {
 
 export const getCharacterDetail = (id) => async (dispatch) => {
     try {
+        dispatch(setLoading(true))
         const { data } = await axios.get(`${URL}/characters/${id}`)
+        dispatch(setLoading(false))
 
         return dispatch(characterInfo(data[0]))
     } catch (error) {

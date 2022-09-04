@@ -7,6 +7,7 @@ import {
     getCharacterDetail,
     getCharacterDeaths
 } from "../../redux-toolkit/actions/charactersActions";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 
 export default function CharacterDetail() {
@@ -16,7 +17,8 @@ export default function CharacterDetail() {
     const {
         characterDetail,
         characterDeath,
-        characterDeaths
+        characterDeaths,
+        loading
     } = useSelector(store => store.characters)
     const [pressed, setPressed] = useState(false)
     
@@ -39,6 +41,7 @@ export default function CharacterDetail() {
     return <div className="bg-yellow-700 min-h-screen">
         <NavBar />
         <div className="flex justify-center">
+            {!loading ?
             <div className="w-3/4 py-10 flex justify-evenly bg-stone-400 rounded-md shadow-xl  my-14">
                 <div className="w-60 flex-col flex items-center">
                     <p className="text-2xl mb-2">{characterDetail?.name}</p>
@@ -83,6 +86,9 @@ export default function CharacterDetail() {
                     </div>
                 </div>
             </div>
+            : <div className="w-3/4 py-10 flex justify-evenly bg-stone-400 rounded-md shadow-xl  my-14">
+                <LoadingSpinner />
+            </div>}
         </div>
     </div>
 }

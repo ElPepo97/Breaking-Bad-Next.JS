@@ -4,7 +4,8 @@ const initialState = {
     allCharacters: [],
     characterDetail: {},
     characterDeath: {},
-    characterDeaths: {}
+    characterDeaths: {},
+    loading: true
 }
 
 const charactersReducer = createSlice({
@@ -27,6 +28,9 @@ const charactersReducer = createSlice({
             state.characterDetail = {},
             state.characterDeath = {},
             state.characterDeaths = {}
+        },
+        setLoading(state, action) {
+            state.loading = action.payload
         }
     }
 })
@@ -36,7 +40,8 @@ export const {
     characterInfo,
     deathInfo,
     deathsInfo,
-    clearInfo
+    clearInfo,
+    setLoading
 } = charactersReducer.actions
 
 export default charactersReducer.reducer
