@@ -5,10 +5,11 @@ import { getAllEpisodes } from "../redux-toolkit/actions/episodesActions";
 import EpisodeCard from '../components/EpisodeCard.js'
 import { clearInfo } from "../redux-toolkit/reducers/characters.slice";
 import LoadingSpinner from "../components/LoadingSpinner";
+import EpisodesFilters from "../components/EpisodesFilters";
 
 
 export default function Episode() {
-    const episodes = useSelector(store => store.episodes.allEpisodes)
+    const episodes = useSelector(store => store.episodes.allEpisodes4)
     const dispatch = useDispatch()
     const [allEpisodes, setAllEpisodes] = useState([])
     const { loading } = useSelector(store => store.characters)
@@ -27,6 +28,7 @@ export default function Episode() {
         <NavBar />
         <div>
             <h1 className='flex justify-center text-3xl m-6'>Episodes</h1>
+            <EpisodesFilters episode={allEpisodes} />
             <div className='flex justify-center'>
             <section className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'>
             {
@@ -43,7 +45,7 @@ export default function Episode() {
                     </div>
                 )
             })
-            : <LoadingSpinner />
+            : <div className="absolute"><LoadingSpinner /></div>
             }
             </section>
             </div>

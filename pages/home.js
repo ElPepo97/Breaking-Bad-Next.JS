@@ -5,10 +5,11 @@ import { useEffect, useState } from 'react'
 import { getAllCharacters } from '../redux-toolkit/actions/charactersActions'
 import { clearInfo } from '../redux-toolkit/reducers/characters.slice'
 import LoadingSpinner from '../components/LoadingSpinner.js'
+import CharacterFilters from '../components/CharacterFilters.js'
 
 
 export default function Home() {
-    const characters = useSelector(store => store.characters.allCharacters);
+    const characters = useSelector(store => store.characters.allCharacters3);
     const [allCharacters, setAllCharacters] = useState([])
     const dispatch = useDispatch()
     const { loading } = useSelector(store => store.characters)
@@ -27,6 +28,7 @@ export default function Home() {
         <NavBar />
         <div>
             <h1 className='flex justify-center text-3xl m-6'>Characters</h1>
+            <CharacterFilters character={allCharacters[0]} />
             <div className='flex justify-center'>
             <section className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'>
             {
@@ -43,7 +45,7 @@ export default function Home() {
                     </div>
                 )
             })
-            : <LoadingSpinner />
+            : <div className='absolute'><LoadingSpinner /></div>
             }
             </section>
             </div>

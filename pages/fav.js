@@ -22,13 +22,20 @@ export default function Fav() {
 
     return <div className="bg-yellow-700 min-h-screen">
         <NavBar />
-        <div className="flex justify-center">
-            <button className="mt-10 mr-10 w-44 bg-white p-2 rounded-md" onClick={handleCharacters}>Favorites characters</button>
-            <button className="mt-10 w-44 bg-white p-2 rounded-md" onClick={handleEpisodes}>Favorites episodes</button>
-        </div>
         {
-        favPage === 'characters' ?
-        <div>
+            favPage === 'characters' ?
+            <div>
+            <div className="flex justify-center">
+                <button
+                    className="mt-10 mr-10 w-44 p-2 rounded-md bg-zinc-500 cursor-auto font-semibold text-white"
+                    onClick={handleCharacters}
+                >
+                    Favorites characters
+                </button>
+                <button className="mt-10 w-44 bg-white p-2 rounded-md" onClick={handleEpisodes}>
+                    Favorites episodes
+                </button>
+            </div>
             <div className='flex justify-center mt-12'>
                 <section className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'>
                     {favorites.length ? favorites.map(c => {
@@ -44,7 +51,7 @@ export default function Fav() {
                             </div>
                         )
                     })
-                    : <div className="text-xl">No characters or episodes added to your favorites list.</div>}
+                    : <div className="text-xl text-center">No characters added to your favorites list.</div>}
                 </section>
             </div>
         </div>
@@ -53,7 +60,18 @@ export default function Fav() {
         {
         favPage === 'episodes' ?
         <div>
-            <div className='flex justify-center'>
+            <div className="flex justify-center">
+                <button className="mt-10 bg-white mr-10 w-44 p-2 rounded-md" onClick={handleCharacters}>
+                    Favorites characters
+                </button>
+                <button
+                    className="mt-10 w-44 p-2 rounded-md bg-zinc-500 cursor-auto font-semibold text-white"
+                    onClick={handleEpisodes}
+                >
+                    Favorites episodes
+                </button>
+            </div>
+            <div className='flex justify-center mt-12'>
                 <section className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'>
                     {favoritesEpisodes.length ? favoritesEpisodes.map(c => {
                         return (
@@ -68,7 +86,7 @@ export default function Fav() {
                             </div>
                         )
                     })
-                    : <div className="text-xl">No characters or episodes added to your favorites list.</div>}
+                    : <div className="text-xl">No episodes added to your favorites list.</div>}
                 </section>
             </div>
         </div>

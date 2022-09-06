@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     allCharacters: [],
+    allCharacters2: [],
+    allCharacters3: [],
     characterDetail: {},
     characterDeath: {},
     characterDeaths: {},
@@ -15,6 +17,8 @@ const charactersReducer = createSlice({
     reducers: {
         fullCharacters(state, action){
             state.allCharacters = action.payload
+            state.allCharacters2 = action.payload
+            state.allCharacters3 = action.payload
         },
         characterInfo(state, action) {
             state.characterDetail = action.payload
@@ -41,6 +45,36 @@ const charactersReducer = createSlice({
                 return void(state.favorites = newFavorites)
             }
             void(state.favorites = [...state.favorites, action.payload])
+        },
+        seriesFilter(state, action) {
+            if (action.payload !== '') {
+                const filter = state.allCharacters.filter(c => c.category.includes(action.payload))
+
+                state.allCharacters2 = filter
+                state.allCharacters3 = filter
+            } else {
+                state.allCharacters2 = state.allCharacters
+                state.allCharacters3 = state.allCharacters
+            }
+        },
+        seasonFilter(state, action) {
+            if (!state.allCharacters3[0].better_call_saul_appearance.length) {
+                if (action.payload !== 'All') {
+                    const filter = state.allCharacters2.filter(c => c.appearance.includes(Number(action.payload)))
+    
+                    state.allCharacters3 = filter
+                } else {
+                    state.allCharacters3 = state.allCharacters2
+                }
+            } else {
+                if (action.payload !== 'All') {
+                    const filter = state.allCharacters2.filter(c => c.better_call_saul_appearance.includes(Number(action.payload)))
+    
+                    state.allCharacters3 = filter
+                } else {
+                    state.allCharacters3 = state.allCharacters2
+                }
+            }
         }
     }
 })
@@ -52,7 +86,9 @@ export const {
     deathsInfo,
     clearInfo,
     setLoading,
-    setFavorites
+    setFavorites,
+    seriesFilter,
+    seasonFilter
 } = charactersReducer.actions
 
 export default charactersReducer.reducer

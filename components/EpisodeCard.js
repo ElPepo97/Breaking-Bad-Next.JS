@@ -27,7 +27,7 @@ export default function EpisodeCard({ episode, title, season, series, characters
                 : <AiOutlineStar className="absolute ml-72 mt-1 text-3xl text-amber-500 cursor-pointer" onClick={handleFavorite}/>
             }
             <h1 className="text-xl pt-3 pb-3 font-semibold bg-green-800 text-white shadow-md">{title}</h1>
-            <div className="mb-4 mx-2"><p className="text-xl">Cast:</p> {characters.join(', ')}</div>
+            <div className="mb-4 mx-2"><p className="text-xl">Episode characters:</p> {characters.join(', ')}</div>
             <p className="text-slate-800 border-t-2 border-black border-gray-400">S{season < 10 ? '0' + season : season} E{episode < 10 ? '0' + episode : episode}</p>
             <p className="mb-2 text-slate-800 content-end">{series}</p>
     </div>
