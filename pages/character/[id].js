@@ -9,6 +9,8 @@ import {
 } from "../../redux-toolkit/actions/charactersActions";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { TiArrowBack } from "react-icons/ti";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
+import { setFavorites } from "../../redux-toolkit/reducers/characters.slice";
 
 
 export default function CharacterDetail() {
@@ -44,12 +46,32 @@ export default function CharacterDetail() {
         history.back()
     }
 
+    const { favorites } = useSelector(store => store.characters)
+
+    const favorite = favorites.filter(c => c.name === characterDetail.name)
+
+    const handleFavorite = (e) => {
+        e.preventDefault()
+        dispatch(setFavorites({
+            name: characterDetail.name,
+            nickname: characterDetail.nickname,
+            img: characterDetail.img,
+            category: characterDetail.category,
+            id
+        }))
+    }
+
     return <div className="bg-yellow-700 min-h-screen">
         <NavBar />
         <div className="flex justify-center">
             {!loading ?
-            <div className="w-3/4 py-10 flex justify-evenly bg-stone-400 rounded-md shadow-xl  my-14">
+            <div className="w-3/4 py-10 flex justify-evenly bg-neutral-600 text-slate-200 rounded-md shadow-xl  my-14">
                 <div className="w-60 flex-col flex items-center">
+                    {
+                        favorite.length
+                        ? <AiFillStar className="absolute ml-64 text-3xl mt-1 text-amber-500 hover:scale-150 duration-200 rotate-12 cursor-pointer" onClick={handleFavorite}/>
+                        : <AiOutlineStar className="absolute ml-64 text-3xl mt-1 text-amber-500 hover:scale-150 duration-200 rotate-12 cursor-pointer" onClick={handleFavorite}/>
+                }
                     <p className="text-2xl mb-2">{characterDetail?.name}</p>
                     <img src={`${characterDetail?.img}`} alt={`${characterDetail?.name}`} className='rounded-xl shadow-lg'/>
                 </div>

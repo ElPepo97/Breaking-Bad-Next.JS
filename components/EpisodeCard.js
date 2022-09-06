@@ -20,11 +20,11 @@ export default function EpisodeCard({ episode, title, season, series, characters
         }))
     }
 
-    return <div className='text-center bg-stone-200 w-80 overflow-hidden rounded-md shadow-md duration-300 hover:scale-110'>
+    return <div className='text-center bg-stone-200 w-80 overflow-hidden rounded-md shadow-md'>
             {
                 favorite.length
-                ? <AiFillStar className="absolute ml-72 mt-1 text-3xl text-amber-500 cursor-pointer" onClick={handleFavorite}/>
-                : <AiOutlineStar className="absolute ml-72 mt-1 text-3xl text-amber-500 cursor-pointer" onClick={handleFavorite}/>
+                ? <AiFillStar className="absolute ml-72 mt-1 text-3xl text-amber-500 cursor-pointer hover:scale-150 duration-200 hover:rotate-12" onClick={handleFavorite}/>
+                : <AiOutlineStar className="absolute ml-72 mt-1 text-3xl text-amber-500 cursor-pointer hover:scale-150 duration-200 hover:rotate-12" onClick={handleFavorite}/>
             }
             <h1 className="text-xl pt-3 pb-3 font-semibold bg-green-800 text-white shadow-md">{title}</h1>
             <div className="mb-4 mx-2"><p className="text-xl">Episode characters:</p> {characters.join(', ')}</div>

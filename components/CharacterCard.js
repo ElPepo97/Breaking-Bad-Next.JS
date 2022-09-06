@@ -21,11 +21,11 @@ export default function CharacterCard({ name, nickname, img, category, id }) {
     }
 
     return <Link href={`/character/${id}`}>
-    <div className='cursor-pointer text-center bg-stone-200 w-80 overflow-hidden rounded-md shadow-md duration-300 hover:scale-110'>
+    <div className='cursor-pointer text-center bg-stone-200 w-80 overflow-hidden rounded-md shadow-md'>
         {
             favorite.length
-            ? <AiFillStar className="absolute ml-72 text-3xl mt-1 text-amber-500" onClick={handleFavorite}/>
-            : <AiOutlineStar className="absolute ml-72 text-3xl mt-1 text-amber-500" onClick={handleFavorite}/>
+            ? <AiFillStar className="absolute ml-72 text-3xl mt-1 text-amber-500 hover:scale-150 duration-200 hover:rotate-12" onClick={handleFavorite}/>
+            : <AiOutlineStar className="absolute ml-72 text-3xl mt-1 text-amber-500 hover:scale-150 duration-200 hover:rotate-12" onClick={handleFavorite}/>
         }
         <img src={`${img}`} className='w-80 h-96 object-cover shadow-md'/>
         <p className="text-xl">{name}</p>
