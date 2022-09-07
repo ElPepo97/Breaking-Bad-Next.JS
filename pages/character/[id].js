@@ -65,7 +65,7 @@ export default function CharacterDetail() {
         <NavBar />
         <div className="flex justify-center">
             {!loading ?
-            <div className="w-3/4 py-10 flex justify-evenly bg-neutral-600 text-slate-200 rounded-md shadow-xl  my-14">
+            <div className="w-3/4 py-10 flex justify-evenly bg-neutral-600 text-slate-200 rounded-md shadow-xl my-14">
                 <div className="w-60 flex-col flex items-center">
                     {
                         favorite.length

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 
 export default function NavBar() {
-    return <div className="bg-emerald-800 shadow-md flex h-10">
+    return <div className="bg-emerald-800 shadow-md flex h-10 fixed top-0 w-full z-20">
         <Link href='/home'>
             <div className={(typeof window !== "undefined" && window.location.pathname !== '/home') ? "w-full text-center cursor-pointer font-semibold text-slate-100 hover:bg-green-800 w-full py-2" : "w-full text-center cursor-pointer font-semibold bg-emerald-900 text-slate-100 w-full py-2"}>
                 Home
@@ -16,6 +16,11 @@ export default function NavBar() {
         <Link href='/fav'>
             <div className={(typeof window !== "undefined" && window.location.pathname !== '/fav') ? "w-full text-center cursor-pointer font-semibold text-slate-100 hover:bg-green-800 w-full py-2" : "w-full text-center cursor-pointer font-semibold bg-emerald-900 text-slate-100 w-full py-2"}>
                 Favorite
+            </div>
+        </Link>
+        <Link href='/play'>
+            <div className={(typeof window !== "undefined" && window.location.pathname !== '/play') ? "w-full text-center cursor-pointer font-semibold text-slate-100 hover:bg-green-800 w-full py-2" : "w-full text-center cursor-pointer font-semibold bg-emerald-900 text-slate-100 w-full py-2"}>
+                Play
             </div>
         </Link>
     </div>

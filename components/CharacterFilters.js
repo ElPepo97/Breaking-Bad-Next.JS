@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { seasonFilter, seriesFilter } from "../redux-toolkit/reducers/characters.slice"
 
 
@@ -7,6 +7,12 @@ export default function CharacterFilters({ character }) {
     const [series, setSeries] = useState('')
     const [season, setSeason] = useState('All')
     const dispatch = useDispatch()
+    const { change } = useSelector(store => store.characters)
+
+    useEffect(() => {
+        setSeries('')
+        setSeason("All")
+    }, [change])
 
     const handleSeason = (e) => {
         e.preventDefault()

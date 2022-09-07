@@ -20,8 +20,9 @@ export default function Fav() {
         setFavPage('episodes')
     }
 
-    return <div className="bg-yellow-700 min-h-screen">
+    return <div className="bg-yellow-700 min-h-screen pt-10">
         <NavBar />
+        <h1 className='text-gray-300 flex justify-center text-3xl m-6'>Favorites List</h1>
         {
             favPage === 'characters' ?
             <div>
@@ -51,7 +52,7 @@ export default function Fav() {
                             </div>
                         )
                     })
-                    : <div className="text-xl text-center">No characters added to your favorites list.</div>}
+                    : <div className="text-xl text-center w-screen">No characters added to your favorites list.</div>}
                 </section>
             </div>
         </div>
@@ -86,7 +87,7 @@ export default function Fav() {
                             </div>
                         )
                     })
-                    : <div className="text-xl">No episodes added to your favorites list.</div>}
+                    : <div className="text-xl text-center w-screen">No episodes added to your favorites list.</div>}
                 </section>
             </div>
         </div>

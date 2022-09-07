@@ -8,7 +8,8 @@ const initialState = {
     characterDeath: {},
     characterDeaths: {},
     loading: true,
-    favorites: []
+    favorites: [],
+    change: false
 }
 
 const charactersReducer = createSlice({
@@ -75,6 +76,10 @@ const charactersReducer = createSlice({
                     state.allCharacters3 = state.allCharacters2
                 }
             }
+        },
+        searchCharacter(state, action) {
+            state.allCharacters3 = state.allCharacters.filter(c => c.name.toUpperCase().includes(action.payload.toUpperCase()))
+            state.change = !state.change
         }
     }
 })
@@ -88,7 +93,8 @@ export const {
     setLoading,
     setFavorites,
     seriesFilter,
-    seasonFilter
+    seasonFilter,
+    searchCharacter
 } = charactersReducer.actions
 
 export default charactersReducer.reducer

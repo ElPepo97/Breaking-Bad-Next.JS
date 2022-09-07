@@ -24,10 +24,10 @@ export default function Episode() {
     }, [episodes])
 
 
-    return <div className="bg-yellow-700 min-h-screen">
+    return <div className="bg-yellow-700 min-h-screen pt-10">
         <NavBar />
         <div>
-            <h1 className='flex justify-center text-3xl m-6'>Episodes</h1>
+            <h1 className='text-gray-300 flex justify-center text-3xl m-6'>Episodes</h1>
             <EpisodesFilters episode={allEpisodes} />
             <div className='flex justify-center'>
             <section className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'>
