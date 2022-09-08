@@ -67,12 +67,14 @@ export default function CharacterDetail() {
             {!loading ?
             <div className="w-3/4 py-10 flex justify-evenly bg-neutral-600 text-slate-200 rounded-md shadow-xl my-14">
                 <div className="w-60 flex-col flex items-center">
-                    {
-                        favorite.length
-                        ? <AiFillStar className="absolute ml-64 text-3xl mt-1 text-amber-500 hover:scale-150 duration-200 rotate-12 cursor-pointer" onClick={handleFavorite}/>
-                        : <AiOutlineStar className="absolute ml-64 text-3xl mt-1 text-amber-500 hover:scale-150 duration-200 rotate-12 cursor-pointer" onClick={handleFavorite}/>
-                }
-                    <p className="text-2xl mb-2">{characterDetail?.name}</p>
+                    <div className="flex inline-block">
+                        <p className="text-2xl mb-2 mr-2">{characterDetail?.name}</p>
+                        {
+                            favorite.length
+                            ? <AiFillStar className="relative text-3xl mt-1 text-amber-500 hover:scale-150 duration-200 rotate-12 cursor-pointer" onClick={handleFavorite}/>
+                            : <AiOutlineStar className="relative text-3xl mt-1 text-amber-500 hover:scale-150 duration-200 rotate-12 cursor-pointer" onClick={handleFavorite}/>
+                        }
+                    </div>
                     <img src={`${characterDetail?.img}`} alt={`${characterDetail?.name}`} className='rounded-xl shadow-lg'/>
                 </div>
                 <div className="flex flex-col text-left justify-center w-1/2 border-l-2 border-gray-700">
