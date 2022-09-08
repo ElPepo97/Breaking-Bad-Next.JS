@@ -35,7 +35,7 @@ export default function Play() {
                     </div>
                     : page === 'game'
                     ? <div className="flex self-center flex-col w-1/3 bg-gray-300 py-6 rounded-lg">
-                        <Game allQuotes={allQuotes}/>
+                        <Game allQuotes={allQuotes} setPage={setPage}/>
                     </div>
                     : <div>
                         // input para poner el nombre y guardarlo.

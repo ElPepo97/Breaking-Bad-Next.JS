@@ -1,14 +1,16 @@
-import { Fragment, useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import LoadingSpinner from "../components/LoadingSpinner";
+import { updateTable } from "../redux-toolkit/reducers/quotes.slice";
 
-export default function Game({ allQuotes }) {
+export default function Game({ allQuotes, setPage }) {
     const [correct, setCorrect] = useState(0)
     const { loading } = useSelector(store => store.characters)
     const [rightQuote, setRightQuote] = useState(allQuotes[0])
     const [options, setOptions] = useState([])
     const [incorrect, setIncorrect] = useState(false)
     const [name, setName] = useState('')
+    const dispatch = useDispatch()
 
     const names = [
         "Walter White",
@@ -67,7 +69,9 @@ export default function Game({ allQuotes }) {
 
     const handleScore = (e) => {
         e.preventDefault()
-        // agregar el score a la tabla general de scores.
+        dispatch(updateTable({name, score: correct}))
+
+        setPage('menu')
     }
 
     return <div className="flex justify-center">
