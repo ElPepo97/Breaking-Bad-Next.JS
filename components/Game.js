@@ -83,7 +83,7 @@ export default function Game({ allQuotes, setPage }) {
             : <div className="flex justify-center flex-col">
                 { !incorrect
                 ? <div className="flex justify-center flex-col">
-                    <p className="flex self-center text-center text-xl mb-8 mx-2">"{rightQuote?.quote}"</p>
+                    <p className="flex self-center text-center text-xl mb-8 mx-2">&quot;{rightQuote?.quote}&quot;</p>
                     {options?.map((o, index) => {
                     return <input type='button'
                         className="flex self-center text-center text-gray-300 font-semibold bg-emerald-800 p-2 rounded-lg w-60 cursor-pointer mb-2 m-2 hover:bg-green-800 focus:bg-emerald-900"

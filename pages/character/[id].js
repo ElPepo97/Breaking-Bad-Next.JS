@@ -98,7 +98,7 @@ export default function CharacterDetail() {
                             className="bg-black text-white w-fit py-1 px-2 rounded-lg"
                             onClick={handleButton}
                         >
-                            Don't spoil!
+                            Don&apos;t spoil!
                         </button>
                         <p>Occupation: {characterDetail?.occupation.join(', ')}</p>
                         <p>{characterDetail?.status !== 'Alive' ? <span>⚰</span> : <span>✔</span>}{characterDetail?.status}</p>
