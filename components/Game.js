@@ -6,7 +6,7 @@ import { updateTable } from "../redux-toolkit/reducers/quotes.slice";
 export default function Game({ allQuotes, setPage }) {
     const [correct, setCorrect] = useState(0)
     const { loading } = useSelector(store => store.characters)
-    const [rightQuote, setRightQuote] = useState(allQuotes[0])
+    const [rightQuote, setRightQuote] = useState(allQuotes[0] || {quote: "I am not in danger, Skyler. I am the danger!", author: "Walter White"})
     const [options, setOptions] = useState([])
     const [incorrect, setIncorrect] = useState(false)
     const [name, setName] = useState('')
