@@ -33,7 +33,7 @@ export default function Play() {
                         <Score />
                         <button className="flex self-center bg-black text-white w-fit py-1 px-2 rounded-lg mt-6" onClick={handlePage}>Become #1!</button>
                     </div>
-                    : <div className="flex self-center flex-col w-1/3 bg-gray-300 py-6 rounded-lg">
+                    : <div className="flex self-center flex-col w-1/3 bg-stone-800 py-6 rounded-lg">
                         <Game allQuotes={allQuotes} setPage={setPage}/>
                     </div>
                 }

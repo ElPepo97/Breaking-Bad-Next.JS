@@ -11,6 +11,7 @@ export default function Game({ allQuotes, setPage }) {
     const [incorrect, setIncorrect] = useState(false)
     const [name, setName] = useState('')
     const dispatch = useDispatch()
+    const [review, setReview] = useState(false)
 
     const names = [
         "Walter White",
@@ -54,12 +55,18 @@ export default function Game({ allQuotes, setPage }) {
 
     const handleAnswer = (e) => {
         e.preventDefault()
-        if (e.target.value === rightQuote.author) {
-            setRightQuote(allQuotes[correct + 1])
-            setCorrect(correct + 1)
-        } else {
-            setIncorrect(true)
+        var a = document.getElementById('rightAnswer')
+        a.className = 'flex self-center text-center text-black font-semibold bg-green-700 p-2 rounded-lg w-60 cursor-pointer mb-2 m-2'
+        a.disabled = true
+        var b = document.querySelectorAll('#wrongAnswer')
+        b.forEach(o => o.disabled = true)
+        
+
+        if (e.target.value !== rightQuote.author) {
+            e.target.className = 'flex self-center text-center text-black font-semibold bg-rose-700 p-2 rounded-lg w-60 cursor-pointer mb-2 m-2'
+            e.target.id = 'incorrect'
         }
+        setReview(true)
     }
 
     const handleName = (e) => {
@@ -74,6 +81,24 @@ export default function Game({ allQuotes, setPage }) {
         setPage('menu')
     }
 
+    const handleNext = (e) => {
+        var a = document.getElementById('rightAnswer')
+        var b = document.querySelectorAll('#wrongAnswer')
+        a.disabled = false
+        b.forEach(o => o.disabled = false)
+        
+        var c = document.getElementById('incorrect')
+        if (c) {
+            setReview(false)
+            setIncorrect(true)
+        } else {
+            a.className = 'flex self-center text-center text-black font-semibold bg-gray-300 p-2 rounded-lg w-60 cursor-pointer mb-2 m-2 hover:bg-gray-500 focus:bg-gray-600'
+            setRightQuote(allQuotes[correct + 1])
+            setCorrect(correct + 1)
+            setReview(false)
+        }
+    }
+
     return <div className="flex justify-center">
         {
             loading ?
@@ -83,19 +108,29 @@ export default function Game({ allQuotes, setPage }) {
             : <div className="flex justify-center flex-col">
                 { !incorrect
                 ? <div className="flex justify-center flex-col">
-                    <p className="flex self-center text-center text-xl mb-8 mx-2">&quot;{rightQuote?.quote}&quot;</p>
+                    <p className="flex self-center text-center text-xl text-white mb-8 mx-2">&quot;{rightQuote?.quote}&quot;</p>
                     {options?.map((o, index) => {
                     return <input type='button'
-                        className="flex self-center text-center text-gray-300 font-semibold bg-emerald-800 p-2 rounded-lg w-60 cursor-pointer mb-2 m-2 hover:bg-green-800 focus:bg-emerald-900"
+                        className="flex self-center text-center text-black font-semibold bg-gray-300 p-2 rounded-lg w-60 cursor-pointer mb-2 m-2 hover:bg-gray-500 focus:bg-gray-600"
                         value={o}
                         key={index}
                         onClick={handleAnswer}
+                        id={o === rightQuote.author ? 'rightAnswer' : 'wrongAnswer'}
+                        disabled={false}
                     />
                     })}
+                    {review ?
+                    <button
+                        className="flex self-center bg-black text-white w-fit py-1 px-2 rounded-lg mt-6"
+                        onClick={handleNext}
+                        id='correct'
+                    >
+                        Next
+                    </button> : null}
                 </div>
                 : <div className="flex flex-col">
-                    <h1 className="text-2xl text-center">Game over</h1>
-                    <h2 className="text-md text-center mb-10">{correct} correct answers</h2>
+                    <h1 className="text-2xl text-center text-white">Game over</h1>
+                    <h2 className="text-md text-center mb-10 text-white">{correct} correct answers</h2>
                     <input
                         value={name}
                         type='text'
